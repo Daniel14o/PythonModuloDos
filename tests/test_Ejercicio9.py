@@ -17,13 +17,13 @@ def test_error_no_lista():
         iva("Camisa")
 
 def test_error_no_diccionario():
-    with pytest.raises(ValueError, match="Debe ser un diccionario"):
+    with pytest.raises(ValueError, match="diccionario"):
         iva(["Camisa", "Pantalón"])
 
 def test_error_faltan_claves():
-    with pytest.raises(ValueError, match="Claves 'nombre' y 'precio'"):
+    with pytest.raises(ValueError, match="claves 'nombre' y 'precio'"):
         iva([{"nombre": "Camisa"}])
 
 def test_error_precio_negativo():
-    with pytest.raises(ValueError, match="Mayor o igual a 0"):
-        iva([{"Nombre": "Camisa", "Precio": -5000}])
+    with pytest.raises(ValueError, match="número mayor o igual a 0"):
+        iva([{"nombre": "Camisa", "precio": -5000}])

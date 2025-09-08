@@ -1,20 +1,17 @@
-import random ,getpass
-
+import random
+import getpass
 
 def modo_juego():
-
     palabras = ["python", "codigo", "programacion", "gato", "aguila", "computador"]
     while True:
-      opcion = input("Seleccione el modo de juego de acuerdo al numero: \n 1. El computador elige \n 2. Alguien elije la palabra \n")
-      if opcion == "1":
-        return random.choice(palabras)
-        break
-      elif opcion == "2":
-        palabra = getpass.getpass("Escriba la palabra secreta: ")
-        palabras=palabra
-        return palabras
-
-
+        opcion = input("Seleccione el modo de juego de acuerdo al número: \n 1. El computador elige \n 2. Alguien elige la palabra \n")
+        if opcion == "1":
+            return random.choice(palabras)
+        elif opcion == "2":
+            palabra = getpass.getpass("Escriba la palabra secreta: ")
+            return palabra
+        else:
+            print("Opción inválida. Intente nuevamente.")
 
 def mostrar_tablero(palabra, letras_adivinadas):
     tablero = ""
@@ -25,7 +22,6 @@ def mostrar_tablero(palabra, letras_adivinadas):
             tablero += "_ "
     return tablero.strip()
 
-
 def validar_entrada(letra, letras_intentadas):
     if len(letra) != 1 or not letra.isalpha():
         print("Debes ingresar una sola letra.")
@@ -34,7 +30,6 @@ def validar_entrada(letra, letras_intentadas):
         print("Ya intentaste esa letra.")
         return False
     return True
-
 
 def juego_ahorcado():
     palabra = modo_juego()
@@ -58,18 +53,16 @@ def juego_ahorcado():
         letras_intentadas.add(letra)
 
         if letra in palabra:
-            print(f"Bien, La letra '{letra}' está en la palabra.")
+            print(f"Bien, la letra '{letra}' está en la palabra.")
             letras_adivinadas.add(letra)
-            # Verificar si ya ganó
             if all(l in letras_adivinadas for l in palabra):
                 print("\nAdivinaste la palabra:", palabra)
                 return
         else:
-            print(f"Error, La letra '{letra}' no está en la palabra.")
+            print(f"Error, la letra '{letra}' no está en la palabra.")
             vidas -= 1
 
     print("\nTe quedaste sin vidas. La palabra era:", palabra)
-
 
 if __name__ == "__main__":
     juego_ahorcado()

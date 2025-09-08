@@ -1,7 +1,8 @@
 from typing import List, Dict
+import re
 def combinar_listas(nombres: List[str], notas: List[float]) -> Dict[str, float]:
     """
-    Combina dos listas en un diccionario {nombre: nota}.
+    Combina dos listas en un diccionario {nombre: nota} con validaciones.
 
     Parámetros:
         nombres (List[str]): Lista de nombres de estudiantes.
@@ -9,7 +10,23 @@ def combinar_listas(nombres: List[str], notas: List[float]) -> Dict[str, float]:
 
     Retorna:
         Dict[str, float]: Diccionario con nombres como claves y notas como valores.
+
+    Lanza:
+        ValueError: Si las listas no tienen la misma longitud,
+                    si algún nombre contiene caracteres no alfabéticos,
+                    o si alguna nota está fuera del rango 0-5.
     """
+    if len(nombres) != len(notas):
+        raise ValueError("Las listas deben tener la misma longitud")
+
+    for nombre in nombres:
+        if not re.fullmatch(r"[A-Za-z]+", nombre):
+            raise ValueError("Los nombres deben contener solo letras")
+
+    for nota in notas:
+        if not (0 <= nota <= 5):
+            raise ValueError("Las notas deben estar entre 0 y 5")
+
     return dict(zip(nombres, notas))
 
 

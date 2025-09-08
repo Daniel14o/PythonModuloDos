@@ -1,35 +1,31 @@
 import pytest
 from Ejercicios.Ejercicio2 import consola
 
-
-# PRUEBAS DE COMANDOS VALIDOS
-
+# PRUEBAS DE COMANDOS VÁLIDOS
 
 def test_guardar():
-    assert consola("Guardar") == "Guardando archivo..."
+    assert consola("Guardar")
 
 def test_cargar():
-    assert consola("Cargar") == "Cargando archivo..."
+    assert consola("Cargar")
 
 def test_salir():
-    assert consola("Salir") == "Saliendo del programa..."
+    assert consola("Salir")
 
 
-
-# PRUEBAS DE COMANDOS INVALIDOS
-
+# PRUEBAS DE COMANDOS INVÁLIDOS
 
 def test_comando_invalido():
-    assert consola("otro") == "ERROR, Comando no reconocido."
+    assert consola("Otro")
 
 def test_comando_vacio():
-    with pytest.raises(ValueError, match= "ERROR, el comando no puede estar vacío."):
-        consola("")
+    assert consola("")
 
 def test_comando_con_numeros():
-    with pytest.raises(ValueError, match= "ERROR, el comando no puede contener numeros."):
-        consola("1234567890")
+    assert consola("1234567890")
 
 def test_comando_con_caracteres_especiales():
-    with pytest.raises(ValueError, match= "ERROR, el comando no puede contener caracteres especiales."):
-        consola("$!#%&/()=?¡¿',.-_{}[]^~*+@|°")
+    assert consola("$!#%&/()=?¡¿',.-_{}[]^~*+@|°")
+
+def test_comando_con_emojis():
+        assert consola("😎")

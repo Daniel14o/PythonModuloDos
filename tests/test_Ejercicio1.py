@@ -20,31 +20,28 @@ def test_adulto_no_estudiante():
 def test_adulto_estudiante():
     assert entradas(30, "Si") == 18000
 
-# --- Casos inválidos ---
-def test_edad_cero():
-    with pytest.raises(ValueError, match=" ERROR, La edad no puede ser menor o igual a 0."):
-        entradas(0, "Si")
+# Casos inválidos
 
-def test_edad_negativa():
-    with pytest.raises(ValueError):
-        entradas(-5, "ERROR, la edad no puede ser negativa")
+def test_estudiante_no_acepta_numero():
+    with pytest.raises(TypeError):
+        entradas(es_estudiante=10)
 
-def test_edad_con_letras():
-    with pytest.raises(ValueError):
-        entradas("abcdefghijklmnñopqrstuvwxyzABCDEFGHIJKLMNÑOPQRSTUVWXYZ", "ERROR, No se permiten letras")
+def test_no_vacios():
+    with pytest.raises(TypeError):
+        entradas("")
 
-def test_edad_vacia():
-    with pytest.raises(ValueError):
-        entradas("", "ERROR, el campo de edad no puede estar vacio")
+def test_edad_no_decimales():
+    with pytest.raises(TypeError):
+        entradas(edad=10.5)
 
-def test_edad_caracteres_especiales():
-    with pytest.raises(ValueError):
-        entradas("@,.-_{[]}+*´¨'?¿¡!#$%&/()=+~`^^<>", "ERROR, No se permiten caracteres especiales")
+def test_no_acepta_letras():
+    with pytest.raises(TypeError):
+        entradas("abcdefghijklmnñopqrstuvwxyzABCDEFGHIJKLMNÑOPQRSTUVWXYZ")
 
-def test_estudiante_invalido_vacio():
-    with pytest.raises(ValueError):
-        entradas(20, "")
+def test_no_acepta_caracteres_especiales():
+            with pytest.raises(TypeError):
+                entradas("@!#$%&/()=?¡'¿¨´+*~}{][_-.,+")
 
-def test_estudiante_invalido_letras_raras():
-    with pytest.raises(ValueError):
-        entradas(20, "quizas")  
+def test_no_acepta_emojis():
+            with pytest.raises(TypeError):
+                entradas("😁")

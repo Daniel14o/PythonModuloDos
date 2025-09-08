@@ -10,11 +10,15 @@ def clasificar_numero(numero: int) -> str:
 
         Conceptos aplicados: Operador ternario, operador módulo (%), if.
     """
+    # --- Validación de tipo ---
+    if not isinstance(numero, int):
+        raise TypeError("La entrada debe ser un número entero.")
+    # ------------------------
+
     resultado: str = "Es par" if numero % 2 == 0 else "Es impar"
     if numero % 5 == 0:
         return f"{resultado} y múltiplo de 5"
     return resultado
-
 
 if __name__ == "__main__":
     try:
@@ -22,3 +26,5 @@ if __name__ == "__main__":
         print(clasificar_numero(numero_ingresado))
     except ValueError:
         print("Debe ingresar un valor valido.")
+    except TypeError as e: # Capturar el TypeError que lanzamos
+        print(f"Error: {e}")
